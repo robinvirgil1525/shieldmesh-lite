@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShieldMesh Lite - Safety Scanner</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f7f6; padding: 20px; text-align: center; }
+        .container { max-width: 500px; background: white; padding: 30px; border-radius: 10px; margin: auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        input[type="text"] { width: 80%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        button { background-color: #0056b3; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #004494; }
+        #results { margin-top: 20px; text-align: left; padding: 15px; background: #e9ecef; border-radius: 5px; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🛡️ ShieldMesh Lite</h2>
+    <p>Enter a suspicious link or your email address for an instant safety audit.</p>
+    
+    <input type="text" id="targetInput" placeholder="e.g., example@email.com or http://bad-link.com">
+    <br>
+    <button onclick="runScan()">Scan Now</button>
+
+    <div id="results">
+        <h3>Audit Report:</h3>
+        <p id="statusOutput"></p>
+        <ul id="checklistOutput"></ul>
+    </div>
+</div>
+
+<script>
+    function runScan() {
+        const input = document.getElementById('targetInput').value;
+        const resultsDiv = document.getElementById('results');
+        const statusOutput = document.getElementById('statusOutput');
+        const checklistOutput = document.getElementById('checklistOutput');
+
+        if (!input) {
+            alert("Please enter a link or email!");
+            return;
+        }
+
+        // In the final version, you will use fetch() here to call the real APIs.
+        // For this visual prototype, we simulate the output based on input type.
+        
+        resultsDiv.style.display = 'block';
+        checklistOutput.innerHTML = ''; 
+
+        if (input.includes('@')) {
+            // Simulated Email Scan Result
+            statusOutput.innerHTML = "<strong>Status:</strong> ⚠️ Warning! This email appeared in 1 known data breach.";
+            checklistOutput.innerHTML = "<li>Change your password immediately.</li><li>Enable Two-Factor Authentication (2FA).</li>";
+        } else {
+            // Simulated URL Scan Result
+            statusOutput.innerHTML = "<strong>Status:</strong> ✅ Safe. No malicious activity detected for this link.";
+            checklistOutput.innerHTML = "<li>Always double-check the URL spelling before entering passwords.</li>";
+        }
+    }
+</script>
+</body>
+</html>
